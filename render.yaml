@@ -1,0 +1,40 @@
+services:
+  # Backend API Service
+  - type: web
+    name: nexusapp-backend
+    runtime: node
+    plan: starter
+    buildCommand: cd backend && npm install
+    startCommand: cd backend && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: MONGODB_URI
+        fromDatabase:
+          name: nexusapp-mongodb
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: CORS_ORIGIN
+        value: https://nexusapp-frontend.onrender.com
+
+  # Frontend Next.js Service
+  - type: web
+    name: nexusapp-frontend
+    runtime: node
+    plan: starter
+    buildCommand: npm install --legacy-peer-deps && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NEXT_PUBLIC_API_URL
+        value: https://nexusapp-backend.onrender.com
+
+databases:
+  - name: nexusapp-mongodb
+    databaseName: nexusapp
+    user: nexusapp_user
+    plan: starter

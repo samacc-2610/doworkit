@@ -1,0 +1,34 @@
+📋 Quick Commands for GitHub Setup
+
+# 1. Initialize Git Repository
+cd d:/Movies/fullstack-3d-app
+git init
+git add .
+git commit -m "Initial commit: NexusApp - 3D Productivity Platform"
+
+# 2. Connect to GitHub (replace 'yourusername' with your GitHub username)
+git remote add origin https://github.com/yourusername/nexusapp.git
+git branch -M main
+git push -u origin main
+
+# 3. Verify everything is uploaded
+# Go to: https://github.com/yourusername/nexusapp
+
+# 4. Deploy to Render
+# Go to: https://render.com
+# Click: New → Blueprint
+# Select your repository
+# Click: Apply
+
+---
+
+Environment Variables for Render:
+
+Backend:
+NODE_ENV=production
+MONGODB_URI=your_mongodb_connection_string
+JWT_SECRET=your_secure_secret_key_here
+CORS_ORIGIN=https://nexusapp-frontend.onrender.com
+
+Frontend:
+NEXT_PUBLIC_API_URL=https://nexusapp-backend.onrender.com
